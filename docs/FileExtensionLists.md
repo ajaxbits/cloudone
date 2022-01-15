@@ -1,0 +1,11 @@
+# FileExtensionLists
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**file_extension_lists** | Option<[**Vec<crate::models::FileExtensionList>**](fileExtensionList.md)> |  | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
