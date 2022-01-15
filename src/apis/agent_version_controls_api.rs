@@ -46,7 +46,7 @@ pub enum SearchAgentVersionControlsError {
 
 
 /// Describe an Agent Version Control by ID. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.describeAgentVersionControl([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.describe_agent_version_control([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.describeAgentVersionControl([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn describe_agent_version_control(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, agent_version_control_id: i32, api_version: &str) -> Result<crate::models::AgentVersionControl, Error<DescribeAgentVersionControlError>> {
+pub fn describe_agent_version_control(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, agent_version_control_id: i32, api_version: &str) -> Result<crate::models::AgentVersionControl, Error<DescribeAgentVersionControlError>> {
 
     let local_var_client = &configuration.client;
 
@@ -63,22 +63,14 @@ pub async fn describe_agent_version_control(configuration: &configuration::Confi
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -90,7 +82,7 @@ pub async fn describe_agent_version_control(configuration: &configuration::Confi
 }
 
 /// Lists all agent version controls. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.listAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.list_agent_version_controls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.listAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn list_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str) -> Result<crate::models::AgentVersionControls, Error<ListAgentVersionControlsError>> {
+pub fn list_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str) -> Result<crate::models::AgentVersionControls, Error<ListAgentVersionControlsError>> {
 
     let local_var_client = &configuration.client;
 
@@ -107,22 +99,14 @@ pub async fn list_agent_version_controls(configuration: &configuration::Configur
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -134,7 +118,7 @@ pub async fn list_agent_version_controls(configuration: &configuration::Configur
 }
 
 /// Modify the agent version controls. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.modifyAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.modify_agent_version_controls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.modifyAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn modify_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str, agent_version_controls: crate::models::AgentVersionControls) -> Result<crate::models::AgentVersionControls, Error<ModifyAgentVersionControlsError>> {
+pub fn modify_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str, agent_version_controls: crate::models::AgentVersionControls) -> Result<crate::models::AgentVersionControls, Error<ModifyAgentVersionControlsError>> {
 
     let local_var_client = &configuration.client;
 
@@ -151,23 +135,15 @@ pub async fn modify_agent_version_controls(configuration: &configuration::Config
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
     local_var_req_builder = local_var_req_builder.json(&agent_version_controls);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -179,7 +155,7 @@ pub async fn modify_agent_version_controls(configuration: &configuration::Config
 }
 
 /// Search for agent version controls using optional filters. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.searchAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.search_agent_version_controls([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>AgentVersionControlsApi.searchAgentVersionControls([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn search_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str, search_filter: Option<crate::models::SearchFilter>) -> Result<crate::models::AgentVersionControls, Error<SearchAgentVersionControlsError>> {
+pub fn search_agent_version_controls(configuration: &configuration::Configuration, agent_version_control_profile_id: i32, api_version: &str, search_filter: Option<crate::models::SearchFilter>) -> Result<crate::models::AgentVersionControls, Error<SearchAgentVersionControlsError>> {
 
     let local_var_client = &configuration.client;
 
@@ -196,23 +172,15 @@ pub async fn search_agent_version_controls(configuration: &configuration::Config
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
     local_var_req_builder = local_var_req_builder.json(&search_filter);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)

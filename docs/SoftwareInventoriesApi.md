@@ -36,7 +36,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -160,7 +160,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -191,7 +191,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 
@@ -254,7 +254,7 @@ Name | Type | Description  | Required | Notes
 
 ### Authorization
 
-[Legacy_API_Key](../README.md#Legacy_API_Key), [Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
+[Trend_Micro_Cloud_One_API_Key](../README.md#Trend_Micro_Cloud_One_API_Key)
 
 ### HTTP request headers
 

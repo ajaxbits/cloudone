@@ -11,6 +11,10 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
+
+        delete_legacy_authorization = pkgs.writeShellScriptBin "delete_legacy_authorization" ''
+
+        '';
       in
       with pkgs; {
         devShell = mkShell {

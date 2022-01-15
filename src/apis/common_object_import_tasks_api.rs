@@ -50,7 +50,7 @@ pub enum SearchCommonObjectImportTasksError {
 
 
 /// Create a task to import common objects. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.createCommonObjectImportTask([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.create_common_object_import_task([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.createCommonObjectImportTask([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn create_common_object_import_task(configuration: &configuration::Configuration, api_version: &str, common_object_import_task: Option<crate::models::CommonObjectImportTask>) -> Result<crate::models::CommonObjectImportTask, Error<CreateCommonObjectImportTaskError>> {
+pub fn create_common_object_import_task(configuration: &configuration::Configuration, api_version: &str, common_object_import_task: Option<crate::models::CommonObjectImportTask>) -> Result<crate::models::CommonObjectImportTask, Error<CreateCommonObjectImportTaskError>> {
 
     let local_var_client = &configuration.client;
 
@@ -64,10 +64,10 @@ pub async fn create_common_object_import_task(configuration: &configuration::Con
     local_var_req_builder = local_var_req_builder.json(&common_object_import_task);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -79,7 +79,7 @@ pub async fn create_common_object_import_task(configuration: &configuration::Con
 }
 
 /// Describe a common object import task by ID. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.describeCommonObjectImportTask([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.describe_common_object_import_task([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.describeCommonObjectImportTask([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn describe_common_object_import_task(configuration: &configuration::Configuration, common_object_import_task_id: i32, api_version: &str) -> Result<crate::models::CommonObjectImportTask, Error<DescribeCommonObjectImportTaskError>> {
+pub fn describe_common_object_import_task(configuration: &configuration::Configuration, common_object_import_task_id: i32, api_version: &str) -> Result<crate::models::CommonObjectImportTask, Error<DescribeCommonObjectImportTaskError>> {
 
     let local_var_client = &configuration.client;
 
@@ -92,10 +92,10 @@ pub async fn describe_common_object_import_task(configuration: &configuration::C
     local_var_req_builder = local_var_req_builder.header("api-version", api_version.to_string());
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -107,7 +107,7 @@ pub async fn describe_common_object_import_task(configuration: &configuration::C
 }
 
 /// List all common object import tasks. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.listCommonObjectImportTasks([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.list_common_object_import_tasks([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.listCommonObjectImportTasks([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn list_common_object_import_tasks(configuration: &configuration::Configuration, api_version: &str) -> Result<crate::models::CommonObjectImportTasks, Error<ListCommonObjectImportTasksError>> {
+pub fn list_common_object_import_tasks(configuration: &configuration::Configuration, api_version: &str) -> Result<crate::models::CommonObjectImportTasks, Error<ListCommonObjectImportTasksError>> {
 
     let local_var_client = &configuration.client;
 
@@ -120,10 +120,10 @@ pub async fn list_common_object_import_tasks(configuration: &configuration::Conf
     local_var_req_builder = local_var_req_builder.header("api-version", api_version.to_string());
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -135,7 +135,7 @@ pub async fn list_common_object_import_tasks(configuration: &configuration::Conf
 }
 
 /// Search for CommonObjectImportTasks using optional filters. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.searchCommonObjectImportTasks([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.search_common_object_import_tasks([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>CommonObjectImportTasksApi.searchCommonObjectImportTasks([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn search_common_object_import_tasks(configuration: &configuration::Configuration, api_version: &str, search_filter: Option<crate::models::SearchFilter>) -> Result<crate::models::CommonObjectImportTasks, Error<SearchCommonObjectImportTasksError>> {
+pub fn search_common_object_import_tasks(configuration: &configuration::Configuration, api_version: &str, search_filter: Option<crate::models::SearchFilter>) -> Result<crate::models::CommonObjectImportTasks, Error<SearchCommonObjectImportTasksError>> {
 
     let local_var_client = &configuration.client;
 
@@ -149,10 +149,10 @@ pub async fn search_common_object_import_tasks(configuration: &configuration::Co
     local_var_req_builder = local_var_req_builder.json(&search_filter);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)

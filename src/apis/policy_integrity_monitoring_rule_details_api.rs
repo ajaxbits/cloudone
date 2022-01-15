@@ -53,7 +53,7 @@ pub enum ResetIntegrityMonitoringRuleOnPolicyError {
 
 
 /// Describe an integrity monitoring rule including policy-level overrides. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.describeIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.describe_integrity_monitoring_rule_on_policy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.describeIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn describe_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<DescribeIntegrityMonitoringRuleOnPolicyError>> {
+pub fn describe_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<DescribeIntegrityMonitoringRuleOnPolicyError>> {
 
     let local_var_client = &configuration.client;
 
@@ -73,22 +73,14 @@ pub async fn describe_integrity_monitoring_rule_on_policy(configuration: &config
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -100,7 +92,7 @@ pub async fn describe_integrity_monitoring_rule_on_policy(configuration: &config
 }
 
 /// Lists all integrity monitoring rules assigned to a policy. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.listIntegrityMonitoringRulesOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.list_integrity_monitoring_rules_on_policy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.listIntegrityMonitoringRulesOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn list_integrity_monitoring_rules_on_policy(configuration: &configuration::Configuration, policy_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRules, Error<ListIntegrityMonitoringRulesOnPolicyError>> {
+pub fn list_integrity_monitoring_rules_on_policy(configuration: &configuration::Configuration, policy_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRules, Error<ListIntegrityMonitoringRulesOnPolicyError>> {
 
     let local_var_client = &configuration.client;
 
@@ -120,22 +112,14 @@ pub async fn list_integrity_monitoring_rules_on_policy(configuration: &configura
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -147,7 +131,7 @@ pub async fn list_integrity_monitoring_rules_on_policy(configuration: &configura
 }
 
 /// Modify an integrity monitoring rule assigned to a policy. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.modifyIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.modify_integrity_monitoring_rule_on_policy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.modifyIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn modify_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, integrity_monitoring_rule: crate::models::IntegrityMonitoringRule, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<ModifyIntegrityMonitoringRuleOnPolicyError>> {
+pub fn modify_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, integrity_monitoring_rule: crate::models::IntegrityMonitoringRule, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<ModifyIntegrityMonitoringRuleOnPolicyError>> {
 
     let local_var_client = &configuration.client;
 
@@ -167,23 +151,15 @@ pub async fn modify_integrity_monitoring_rule_on_policy(configuration: &configur
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
     local_var_req_builder = local_var_req_builder.json(&integrity_monitoring_rule);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -195,7 +171,7 @@ pub async fn modify_integrity_monitoring_rule_on_policy(configuration: &configur
 }
 
 /// Remove all overrides for an integrity monitoring rule from a policy. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.resetIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.reset_integrity_monitoring_rule_on_policy([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>PolicyIntegrityMonitoringRuleDetailsApi.resetIntegrityMonitoringRuleOnPolicy([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn reset_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<ResetIntegrityMonitoringRuleOnPolicyError>> {
+pub fn reset_integrity_monitoring_rule_on_policy(configuration: &configuration::Configuration, policy_id: i32, integrity_monitoring_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::IntegrityMonitoringRule, Error<ResetIntegrityMonitoringRuleOnPolicyError>> {
 
     let local_var_client = &configuration.client;
 
@@ -215,22 +191,14 @@ pub async fn reset_integrity_monitoring_rule_on_policy(configuration: &configura
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)

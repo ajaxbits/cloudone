@@ -52,7 +52,7 @@ pub enum SetFirewallRuleIdsOnComputerError {
 
 
 /// Assign firewall rule IDs to a computer. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.addFirewallRuleIDsToComputer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.add_firewall_rule_ids_to_computer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.addFirewallRuleIDsToComputer([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn add_firewall_rule_ids_to_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, rule_ids: crate::models::RuleIds, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<AddFirewallRuleIdsToComputerError>> {
+pub fn add_firewall_rule_ids_to_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, rule_ids: crate::models::RuleIds, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<AddFirewallRuleIdsToComputerError>> {
 
     let local_var_client = &configuration.client;
 
@@ -72,23 +72,15 @@ pub async fn add_firewall_rule_ids_to_computer(configuration: &configuration::Co
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
     local_var_req_builder = local_var_req_builder.json(&rule_ids);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -100,7 +92,7 @@ pub async fn add_firewall_rule_ids_to_computer(configuration: &configuration::Co
 }
 
 /// Lists all firewall rule IDs assigned to a computer. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.listFirewallRuleIDsOnComputer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.list_firewall_rule_ids_on_computer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.listFirewallRuleIDsOnComputer([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn list_firewall_rule_ids_on_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<ListFirewallRuleIdsOnComputerError>> {
+pub fn list_firewall_rule_ids_on_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<ListFirewallRuleIdsOnComputerError>> {
 
     let local_var_client = &configuration.client;
 
@@ -120,22 +112,14 @@ pub async fn list_firewall_rule_ids_on_computer(configuration: &configuration::C
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -147,7 +131,7 @@ pub async fn list_firewall_rule_ids_on_computer(configuration: &configuration::C
 }
 
 /// Unassign a firewall rule ID from a computer. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.removeFirewallRuleIDFromComputer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.remove_firewall_rule_id_from_computer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.removeFirewallRuleIDFromComputer([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn remove_firewall_rule_id_from_computer(configuration: &configuration::Configuration, computer_id: i32, firewall_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<RemoveFirewallRuleIdFromComputerError>> {
+pub fn remove_firewall_rule_id_from_computer(configuration: &configuration::Configuration, computer_id: i32, firewall_rule_id: i32, api_version: &str, overrides: Option<bool>) -> Result<crate::models::FirewallAssignments, Error<RemoveFirewallRuleIdFromComputerError>> {
 
     let local_var_client = &configuration.client;
 
@@ -167,22 +151,14 @@ pub async fn remove_firewall_rule_id_from_computer(configuration: &configuration
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
@@ -194,7 +170,7 @@ pub async fn remove_firewall_rule_id_from_computer(configuration: &configuration
 }
 
 /// Set firewall rule IDs assigned to a computer. <header class=\"param-type\">Related SDK Methods:</header><div _ngcontent-c12=\"\" class=\"params-wrap\"><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Java</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.setFirewallRuleIDsOnComputer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">Python</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.set_firewall_rule_ids_on_computer([param1, param2, ...])</p></span>    </div>  </div></div><div _ngcontent-c12=\"\" class=\"param\">  <div _ngcontent-c12=\"\" class=\"param-name\">    <span _ngcontent-c12=\"\" class=\"param-name-wrap\">JavaScript</span>  </div>  <div _ngcontent-c12=\"\" class=\"param-info\">    <div></div>    <div _ngcontent-c12=\"\" class=\"param-description\">      <span class=\"redoc-markdown-block\"><p>ComputerFirewallRuleAssignmentsApi.setFirewallRuleIDsOnComputer([param1, param2, ...])</p></span>    </div>  </div></div></div>
-pub async fn set_firewall_rule_ids_on_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, overrides: Option<bool>, rule_ids: Option<crate::models::RuleIds>) -> Result<crate::models::FirewallAssignments, Error<SetFirewallRuleIdsOnComputerError>> {
+pub fn set_firewall_rule_ids_on_computer(configuration: &configuration::Configuration, computer_id: i32, api_version: &str, overrides: Option<bool>, rule_ids: Option<crate::models::RuleIds>) -> Result<crate::models::FirewallAssignments, Error<SetFirewallRuleIdsOnComputerError>> {
 
     let local_var_client = &configuration.client;
 
@@ -214,23 +190,15 @@ pub async fn set_firewall_rule_ids_on_computer(configuration: &configuration::Co
             Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
             None => local_var_key,
         };
-        local_var_req_builder = local_var_req_builder.header("api-secret-key", local_var_value);
-    };
-    if let Some(ref local_var_apikey) = configuration.api_key {
-        let local_var_key = local_var_apikey.key.clone();
-        let local_var_value = match local_var_apikey.prefix {
-            Some(ref local_var_prefix) => format!("{} {}", local_var_prefix, local_var_key),
-            None => local_var_key,
-        };
         local_var_req_builder = local_var_req_builder.header("Authorization", local_var_value);
     };
     local_var_req_builder = local_var_req_builder.json(&rule_ids);
 
     let local_var_req = local_var_req_builder.build()?;
-    let local_var_resp = local_var_client.execute(local_var_req).await?;
+    let mut local_var_resp = local_var_client.execute(local_var_req)?;
 
     let local_var_status = local_var_resp.status();
-    let local_var_content = local_var_resp.text().await?;
+    let local_var_content = local_var_resp.text()?;
 
     if !local_var_status.is_client_error() && !local_var_status.is_server_error() {
         serde_json::from_str(&local_var_content).map_err(Error::from)
