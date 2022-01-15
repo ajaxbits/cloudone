@@ -12,8 +12,8 @@
           inherit system overlays;
         };
 
-        delete_legacy_authorization = pkgs.writeShellScriptBin "delete_legacy_authorization" ''
-
+        get-openapi-spec = pkgs.writeShellScriptBin "get-openapi-spec" ''
+          ${pkgs.jq}/bin/jq 'del(.components.securitySchemes.Legacy_API_Key)' swagger.json > openapi-spec.json
         '';
       in
       with pkgs; {
@@ -24,6 +24,7 @@
             openssl
             pkgconfig
             openapi-generator-cli
+            get-openapi-spec
           ];
         };
       });
