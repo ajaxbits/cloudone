@@ -19,7 +19,7 @@
       with pkgs; {
         devShell = mkShell {
           buildInputs = [
-            rust-bin.stable."1.58.0".default
+            (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default))
             cargo-edit
             openssl
             pkgconfig
